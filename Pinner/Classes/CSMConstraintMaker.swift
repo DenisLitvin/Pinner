@@ -110,7 +110,7 @@ enum CSMConstraintType {
 
 extension UIView {
     
-    func makeConstraints(for constraints: CSMConstraintType..., closure: @escaping (CSMConstraintPinner) -> () ){
+    public func makeConstraints(for constraints: CSMConstraintType..., closure: @escaping (CSMConstraintPinner) -> () ){
         
         let pinner = CSMConstraintPinner()
         translatesAutoresizingMaskIntoConstraints = false
