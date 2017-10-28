@@ -22,11 +22,11 @@ public class CSMConstraintPinner {
         anchors.append(anchor)
     }
     
-    func equal(_ constant: CGFloat) {
+    public func equal(_ constant: CGFloat) {
         _ = equalAndReturn(constant)
     }
     
-    func equalAndReturn(_ constant: CGFloat) -> NSLayoutConstraint {
+    public func equalAndReturn(_ constant: CGFloat) -> NSLayoutConstraint {
         
         if let fromAnchor = anchors.first as? NSLayoutDimension {
             lastConstraint = fromAnchor.constraint(equalToConstant: constant)
@@ -36,11 +36,11 @@ public class CSMConstraintPinner {
     }
     
     
-    func pin<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
+    public func pin<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
         
         _ = pinAndReturn(to: anchor, const: const, mult: mult, options: options)
     }
-    func pinAndReturn<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil) -> NSLayoutConstraint{
+    public func pinAndReturn<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil) -> NSLayoutConstraint{
         
         if let firstAnchor = anchors.first as? NSLayoutAnchor<NSLayoutDimension>,
             let fromAnchor = firstAnchor as? NSLayoutDimension,

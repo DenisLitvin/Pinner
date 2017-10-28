@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     
-    func fillSafeArea(with view: UIView){
+    public func fillSafeArea(with view: UIView){
         
         view.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 11.0, *) {
