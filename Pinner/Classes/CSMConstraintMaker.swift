@@ -85,14 +85,14 @@ public class CSMConstraintPinner {
     }
 }
 
-enum CSMConstraintOptions {
+public enum CSMConstraintOptions {
     
     case equal
     case lessOrEqual
     case moreOrEqual
 }
 
-enum CSMConstraintType {
+public enum CSMConstraintType {
     
     case top
     case leading

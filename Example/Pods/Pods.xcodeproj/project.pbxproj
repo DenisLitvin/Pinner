@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A4A611708BB3FA3A66FE970202960E4 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48E1F21F1A109B6CBFC5EBFD668BED /* ReplaceMe.swift */; };
 		211B570DBFFF5AF33E6C2FD4ED71C58D /* Pinner-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D486B1BCC7B8661ED7EA6D22CC1DCF8 /* Pinner-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29B59F8F4D8A3F4D049D44CAA9F99EEA /* Pinner-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 937536CD626550F55039CA2BA8C50BBC /* Pinner-dummy.m */; };
 		4BABA18DA1D00D5CD4789601A0263B21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
@@ -17,6 +16,8 @@
 		B7E20C69233F9578C6000323BA7A6FB1 /* Pods-Pinner_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF8B694BD73244CA5313DD8D9D31DF0B /* Pods-Pinner_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C4BF56D359E46D230357A66E70FA48A1 /* Pods-Pinner_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6707BB06C31ED5744E5B6D93CEEA9952 /* Pods-Pinner_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C87FB23C2D63E5ED735CC864FCECB9A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		FA953C3D1FA51EA0003CBF2B /* CSMConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA953C3B1FA51EA0003CBF2B /* CSMConstraintMaker.swift */; };
+		FA953C3E1FA51EA0003CBF2B /* UIView+LayoutHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA953C3C1FA51EA0003CBF2B /* UIView+LayoutHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +55,11 @@
 		A422C1E7CB81E457666565CC0BCE66E1 /* Pods-Pinner_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pinner_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0B16C51348630EDA5A17DAD2BE2120E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6B5DD5DA90D168F965DD5AFBF2EFE23 /* Pods-Pinner_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Pinner_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		DB48E1F21F1A109B6CBFC5EBFD668BED /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = Pinner/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		E306A4DE9753156594C1A5A6EDD55F2E /* Pods-Pinner_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pinner_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E76D1DB58824388911306C06F5FD14EC /* Pods_Pinner_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pinner_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F34B34F5849F9BE190C6B9819FA45963 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA953C3B1FA51EA0003CBF2B /* CSMConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CSMConstraintMaker.swift; path = Pinner/Classes/CSMConstraintMaker.swift; sourceTree = "<group>"; };
+		FA953C3C1FA51EA0003CBF2B /* UIView+LayoutHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+LayoutHelpers.swift"; path = "Pinner/Classes/UIView+LayoutHelpers.swift"; sourceTree = "<group>"; };
 		FB74AA0A9CF371CC90BD6C439D24098C /* Pods-Pinner_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Pinner_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FC3546F6CC128689182095F0130858AB /* Pinner.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pinner.xcconfig; sourceTree = "<group>"; };
 		FC5F9871A29D50183C2D150390A0D115 /* Pods-Pinner_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Pinner_Example.modulemap"; sourceTree = "<group>"; };
@@ -113,7 +115,8 @@
 		2961CB7E4820B8F0EFB26A409DC15551 /* Pinner */ = {
 			isa = PBXGroup;
 			children = (
-				DB48E1F21F1A109B6CBFC5EBFD668BED /* ReplaceMe.swift */,
+				FA953C3B1FA51EA0003CBF2B /* CSMConstraintMaker.swift */,
+				FA953C3C1FA51EA0003CBF2B /* UIView+LayoutHelpers.swift */,
 				B4EABCE1EA9E13CE1868DB67A8F1476A /* Support Files */,
 			);
 			name = Pinner;
@@ -296,6 +299,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					BEC2265951EFEBD8833A68430D44BA1C = {
+						LastSwiftMigration = 0900;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -322,7 +330,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B59F8F4D8A3F4D049D44CAA9F99EEA /* Pinner-dummy.m in Sources */,
-				0A4A611708BB3FA3A66FE970202960E4 /* ReplaceMe.swift in Sources */,
+				FA953C3D1FA51EA0003CBF2B /* CSMConstraintMaker.swift in Sources */,
+				FA953C3E1FA51EA0003CBF2B /* UIView+LayoutHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC3546F6CC128689182095F0130858AB /* Pinner.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -637,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC3546F6CC128689182095F0130858AB /* Pinner.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
