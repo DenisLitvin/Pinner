@@ -12,7 +12,7 @@ public class CSMConstraintPinner {
     
     private var anchors: [Any] = []
     
-    private var lastConstraint: NSLayoutConstraint?
+    private var constraints: [NSLayoutConstraint] = []
     
     init() {
         
@@ -20,6 +20,9 @@ public class CSMConstraintPinner {
     
     fileprivate func add(_ anchor: Any){
         anchors.append(anchor)
+    }
+    public func returnAll() -> [NSLayoutConstraint]{
+        return constraints
     }
     
     public func equal(_ constant: CGFloat) {
@@ -29,10 +32,10 @@ public class CSMConstraintPinner {
     public func equalAndReturn(_ constant: CGFloat) -> NSLayoutConstraint {
         
         if let fromAnchor = anchors.first as? NSLayoutDimension {
-            lastConstraint = fromAnchor.constraint(equalToConstant: constant)
+            constraints.append(fromAnchor.constraint(equalToConstant: constant))
         }
         iterateConstraint()
-        return lastConstraint ?? NSLayoutConstraint()
+        return constraints.last ?? NSLayoutConstraint()
     }
     
     
@@ -52,18 +55,18 @@ public class CSMConstraintPinner {
             constrainWithConstant(fromAnchor: fromAnchor, toAnchor: anchor, const: const, options: options)
         }
         iterateConstraint()
-        return lastConstraint ?? NSLayoutConstraint()
+        return constraints.last ?? NSLayoutConstraint()
     }
     
     private func constrainWithConstant<T>(fromAnchor: NSLayoutAnchor<T>, toAnchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
         
         switch options{
         case .none, .some(.equal):
-            lastConstraint = fromAnchor.constraint(equalTo: toAnchor, constant: const ?? 0)
+            constraints.append(fromAnchor.constraint(equalTo: toAnchor, constant: const ?? 0))
         case .some(.lessOrEqual):
-            lastConstraint = fromAnchor.constraint(lessThanOrEqualTo: toAnchor, constant: const ?? 0)
+            constraints.append(fromAnchor.constraint(lessThanOrEqualTo: toAnchor, constant: const ?? 0))
         case .some(.moreOrEqual):
-            lastConstraint = fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, constant: const ?? 0)
+            constraints.append(fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, constant: const ?? 0))
         }
     }
 
@@ -71,16 +74,16 @@ public class CSMConstraintPinner {
         
         switch options{
         case .none, .some(.equal):
-            lastConstraint = fromAnchor.constraint(equalTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0)
+            constraints.append(fromAnchor.constraint(equalTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
         case .some(.lessOrEqual):
-            lastConstraint = fromAnchor.constraint(lessThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0)
+            constraints.append(fromAnchor.constraint(lessThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
         case .some(.moreOrEqual):
-            lastConstraint = fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0)
+           constraints.append(fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
         }
     }
     
     private func iterateConstraint(){
-        lastConstraint?.isActive = true
+        constraints.last?.isActive = true
         anchors.removeFirst()
     }
 }
