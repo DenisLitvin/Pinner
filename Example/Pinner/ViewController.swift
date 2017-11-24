@@ -25,7 +25,12 @@ class ViewController: UIViewController {
 
     private func setupView() {
         view.addSubview(canvasView)
-        self.fillSafeArea(with: canvasView)
+        canvasView.makeConstraints(for: .top, .left, .width, .height) { (make) in
+            make.pin(to: self.view.topAnchor, const: 30)
+            make.pin(to: self.view.leftAnchor, const: 10)
+            make.pin(to: self.view.widthAnchor, mult: 0.3)
+            make.equal(200)
+        }
     }
 
 }
