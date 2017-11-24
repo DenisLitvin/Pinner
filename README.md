@@ -10,8 +10,8 @@
 If you you want to see the full example, run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ### Pinner
-All the constraints are specified as the input parameters, all calculations are made in the closure.
-You can easily pin the view to any side of it's superview with `pin(to:)`, or `pinAndReturn(to:)` methods of the instance of `CSMConstraintPinner`, if you want to use the constraint later.
+All constraints are specified as the input parameters, all calculations are made in the closure.
+You can easily pin the view to any side of it's superview with `pin(to:)`, method of the instance of `CSMConstraintPinner`, or `pinAndReturn(to:)` if you want to use the constraint later.
 Constants are made by using `equal(_:)` or `equalAndReturn(_:)` methods.
 
 #### Input parameters for `pin` methods (use in that order):
@@ -19,6 +19,7 @@ Constants are made by using `equal(_:)` or `equalAndReturn(_:)` methods.
 -  `const` : CGFloat - constant offset in certain axis.
 - `mult` : CGFLoat - multiplier, uses only for height and width anchors.
 - `options` : CSMConstraintOptions - possible options: `.equal`,  `.lessOrEqual`, `.moreOrEqual`.
+
 **By default you only need to specify the anchor, all constraints are activated and underlying view has it's property `translatesAutoresizingMaskIntoConstraints` set to false!**
 
 #### Input parameter for `equal` methods is only the constant(CGFloat).
