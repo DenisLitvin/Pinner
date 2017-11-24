@@ -10,8 +10,25 @@
 If you you want to see the full example, run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ### Pinner
-All constraints are specified as the input parameters, all calculations are made in the closure.
-You can easily pin the view to any side of it's superview with `pin(to:)`, method of the instance of `CSMConstraintPinner`, or `pinAndReturn(to:)` if you want to use the constraint later.
+All constraints are specified as the input parameters. Call the method of `UIView` - `makeConstraints(for:)` which takes one or more instances of `CSMConstraintType` enumeration, separated with commas.
+```swift
+enum CSMConstraintType {
+    case top
+    case leading
+    case left
+    case bottom
+    case trailing
+    case right
+
+    case height
+    case width
+
+    case centerX
+    case centerY
+}
+```
+
+All calculations are made in the closure. You can easily pin the view to any side of it's superview with `pin(to:)`, method of the instance of `CSMConstraintPinner`, or `pinAndReturn(to:)` if you want to use the constraint later.
 Constants are made by using `equal(_:)` or `equalAndReturn(_:)` methods.
 
 #### Input parameters for `pin` methods (use in that order):
@@ -31,6 +48,7 @@ And you can deactivate your constraints using `deactivate(_ :)` with the index o
 <img src="sample1.png" width="300" max-width="50%" />
 </p>
 
+### Example
 ```swift
 someView.makeConstraints(for: .top, .left, .width, .height) { (make) in
     self.someViewTopAnchor = make.pinAndReturn(to: self.view.topAnchor, const: 30)
