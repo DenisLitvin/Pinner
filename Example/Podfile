@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'Pinner_Example' do
-  pod 'Pinner', :path => '../'
+  pod 'Pinner'
 
   target 'Pinner_Tests' do
     inherit! :search_paths

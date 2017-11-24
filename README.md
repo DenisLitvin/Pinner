@@ -7,18 +7,34 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+If you you want to see the full example, run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
+### Helper functions
+
+1. Arrange view based on `Safe Area Layout Guide` that works for all devices and ios versions:
+
+```swift
+viewController.view.addSubview(canvasView)
+viewController.fillSafeArea(with: canvasView)
+```
+<p align="right">
+<img src="safeArea.png" width="200" max-width="50%" />
+</p>
+2. 
 
 ## Installation
 
-Pinner is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+*CocoaPods:**
 
-```ruby
-pod 'Pinner'
-```
+Add the line `pod "Pinner"` to your `Podfile`
+
+*Manual:**
+
+Clone the repo and drag the file `Pinner.swift` into your Xcode project.
+
+## Platform support
+
+- iOS 9.3 and above
 
 ## Author
 

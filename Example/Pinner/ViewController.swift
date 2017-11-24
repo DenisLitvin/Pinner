@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import Pinner
 
 class ViewController: UIViewController {
 
+    let canvasView: UIView = {
+        let view = UIView()
+        view.layer.borderColor = UIColor.red.cgColor
+        view.layer.borderWidth = 5
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = .blue
+        setupView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func setupView() {
+        view.addSubview(canvasView)
+        self.fillSafeArea(with: canvasView)
     }
 
 }

@@ -21,10 +21,16 @@ public class CSMConstraintPinner {
     fileprivate func add(_ anchor: Any){
         anchors.append(anchor)
     }
-    public func returnAll() -> [NSLayoutConstraint]{
+    
+    public func returnAll() -> [NSLayoutConstraint] {
         return constraints
     }
-    
+    public func deactivate(_ i: Int) {
+        NSLayoutConstraint.deactivate([constraints[i]])
+    }
+    public func deactivateAll() {
+       NSLayoutConstraint.deactivate(constraints)
+    }
     public func equal(_ constant: CGFloat) {
         _ = equalAndReturn(constant)
     }
