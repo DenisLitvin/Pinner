@@ -1,6 +1,6 @@
 //
 //  CSMConstraintManager.swift
-//  testingAnchors
+//  
 //
 //  Created by macbook on 28.10.2017.
 //  Copyright © 2017 macbook. All rights reserved.
@@ -8,15 +8,11 @@
 
 import UIKit
 
-public class CSMConstraintPinner {
+public class CSMConstraintMaker {
     
+    private var currentAnchorIdx = 0
     private var anchors: [Any] = []
-    
     private var constraints: [NSLayoutConstraint] = []
-    
-    init() {
-        
-    }
     
     fileprivate func add(_ anchor: Any){
         anchors.append(anchor)
@@ -29,7 +25,7 @@ public class CSMConstraintPinner {
         NSLayoutConstraint.deactivate([constraints[i]])
     }
     public func deactivateAll() {
-       NSLayoutConstraint.deactivate(constraints)
+        NSLayoutConstraint.deactivate(constraints)
     }
     public func equal(_ constant: CGFloat) {
         _ = equalAndReturn(constant)
@@ -37,34 +33,32 @@ public class CSMConstraintPinner {
     
     public func equalAndReturn(_ constant: CGFloat) -> NSLayoutConstraint {
         
-        if let fromAnchor = anchors.first as? NSLayoutDimension {
+        if let fromAnchor = anchors[currentAnchorIdx] as? NSLayoutDimension {
             constraints.append(fromAnchor.constraint(equalToConstant: constant))
         }
         iterateConstraint()
-        return constraints.last ?? NSLayoutConstraint()
+        return constraints.last!
     }
     
-    
-    public func pin<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
-        
-        _ = pinAndReturn(to: anchor, const: const, mult: mult, options: options)
-    }
-    public func pinAndReturn<T>(to anchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil) -> NSLayoutConstraint{
-        
-        if let firstAnchor = anchors.first as? NSLayoutAnchor<NSLayoutDimension>,
-            let fromAnchor = firstAnchor as? NSLayoutDimension,
-            let secondAnchor = anchor as? NSLayoutAnchor<NSLayoutDimension>,
-            let toAnchor = secondAnchor as? NSLayoutDimension {
-            constrainWithMultiplier(fromAnchor: fromAnchor, toAnchor: toAnchor, const: const, mult: mult, options: options)
+    @discardableResult
+    public func pin<T>(to anchor: NSLayoutAnchor<T>,
+                       const: CGFloat? = nil,
+                       mult: CGFloat? = nil,
+                       options: ConstraintOptions? = nil) -> NSLayoutConstraint
+    {
+        if  let fromAnchor = anchors[currentAnchorIdx] as? NSLayoutDimension,
+            let toAnchor = anchor as? NSLayoutDimension
+        {
+            constrainDimensions(fromAnchor: fromAnchor, toAnchor: toAnchor, const: const, mult: mult, options: options)
         }
-        else if let fromAnchor = anchors.first as? NSLayoutAnchor<T> {
-            constrainWithConstant(fromAnchor: fromAnchor, toAnchor: anchor, const: const, options: options)
+        else if let fromAnchor = anchors[currentAnchorIdx] as? NSLayoutAnchor<T> {
+            constrainAxes(fromAnchor: fromAnchor, toAnchor: anchor, const: const, options: options)
         }
         iterateConstraint()
-        return constraints.last ?? NSLayoutConstraint()
+        return constraints.last!
     }
     
-    private func constrainWithConstant<T>(fromAnchor: NSLayoutAnchor<T>, toAnchor: NSLayoutAnchor<T>, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
+    private func constrainAxes<T>(fromAnchor: NSLayoutAnchor<T>, toAnchor: NSLayoutAnchor<T>, const: CGFloat? = nil, options: ConstraintOptions? = nil){
         
         switch options{
         case .none, .some(.equal):
@@ -75,8 +69,8 @@ public class CSMConstraintPinner {
             constraints.append(fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, constant: const ?? 0))
         }
     }
-
-    private func constrainWithMultiplier(fromAnchor: NSLayoutDimension, toAnchor: NSLayoutDimension, const: CGFloat? = nil, mult: CGFloat? = nil, options: CSMConstraintOptions? = nil){
+    
+    private func constrainDimensions(fromAnchor: NSLayoutDimension, toAnchor: NSLayoutDimension, const: CGFloat? = nil, mult: CGFloat? = nil, options: ConstraintOptions? = nil){
         
         switch options{
         case .none, .some(.equal):
@@ -84,24 +78,24 @@ public class CSMConstraintPinner {
         case .some(.lessOrEqual):
             constraints.append(fromAnchor.constraint(lessThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
         case .some(.moreOrEqual):
-           constraints.append(fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
+            constraints.append(fromAnchor.constraint(greaterThanOrEqualTo: toAnchor, multiplier: mult ?? 1, constant: const ?? 0))
         }
     }
     
     private func iterateConstraint(){
         constraints.last?.isActive = true
-        anchors.removeFirst()
+        currentAnchorIdx += 1
     }
 }
 
-public enum CSMConstraintOptions {
+public enum ConstraintOptions {
     
     case equal
     case lessOrEqual
     case moreOrEqual
 }
 
-public enum CSMConstraintType {
+public enum ConstraintType {
     
     case top
     case leading
@@ -119,42 +113,35 @@ public enum CSMConstraintType {
 
 extension UIView {
     
-    public func makeConstraints(for constraints: CSMConstraintType..., closure: @escaping (CSMConstraintPinner) -> () ){
+    public func makeConstraints(for constraints: ConstraintType..., closure: @escaping (ConstraintMaker) -> () ){
         
-        let pinner = CSMConstraintPinner()
+        let maker = ConstraintMaker()
         translatesAutoresizingMaskIntoConstraints = false
         
         for constraint in constraints {
             switch constraint {
             case .top:
-                pinner.add(topAnchor)
+                maker.add(topAnchor)
             case .left:
-                pinner.add(leftAnchor)
+                maker.add(leftAnchor)
             case.bottom:
-                pinner.add(bottomAnchor)
+                maker.add(bottomAnchor)
             case .right:
-                pinner.add(rightAnchor)
+                maker.add(rightAnchor)
             case .leading:
-                pinner.add(leadingAnchor)
+                maker.add(leadingAnchor)
             case .trailing:
-                pinner.add(trailingAnchor)
+                maker.add(trailingAnchor)
             case .height:
-                pinner.add(heightAnchor)
+                maker.add(heightAnchor)
             case .width:
-                pinner.add(widthAnchor)
+                maker.add(widthAnchor)
             case .centerX:
-                pinner.add(centerXAnchor)
+                maker.add(centerXAnchor)
             case .centerY:
-                pinner.add(centerYAnchor)
+                maker.add(centerYAnchor)
             }
         }
-        closure(pinner)
+        closure(maker)
     }
 }
-
-
-
-
-
-
-
